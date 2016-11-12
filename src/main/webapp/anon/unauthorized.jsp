@@ -4,13 +4,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>this is resource2.jsp</title>
+<title>this is unauthorized.jps </title>
 </head>
 <body>
-<h1>资源2</h1>
-<h2>
-你已经认证通过了
-</h2>
-
+<!-- 当访问没有授权的页面是被踢到此页面 -->
+	<h1>对不起你无权访问此页面！</h1>
 </body>
 </html>

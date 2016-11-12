@@ -57,9 +57,9 @@
     -->  
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">  
 	        <property name="securityManager" ref="securityManager"></property>   <!-- Shiro的核心安全接口，这个属性是必须的 -->  
-	        <property name="loginUrl" value="/login.jsp"></property>    <!-- 要求登录时的链接(登录页面地址)，非必须的属性，默认会自动寻找Web工程根目录下的"/login.jsp"页面 -->  
+	        <property name="loginUrl" value="/anon/login.jsp"></property>    <!-- 要求登录时的链接(登录页面地址)，非必须的属性，默认会自动寻找Web工程根目录下的"/login.jsp"页面 -->  
 	        <!-- <property name="successUrl" value="/" ></property> -->  <!-- 登录成功后要跳转的连接(本例中此属性用不到，因为登录成功后的处理逻辑在LoginController里硬编码) -->  
-	        <property name="unauthorizedUrl" value="/login/unauthorized"></property>   <!-- 用户访问未对其授权的资源(但是已经认证过了，如果没有认证会让其登录！！！)时，所显示的连接 -->  
+	        <property name="unauthorizedUrl" value="/anon/unauthorized.jsp"></property>   <!-- 用户访问未对其授权的资源(但是已经认证过了，如果没有认证会让其登录！！！)时，所显示的连接 -->  
 	        <property name="filterChainDefinitions">  
 		            <value> 
 		           <!--  hiro验证URL时,URL匹配成功便不再继续匹配查找(所以要注意配置文件中的URL顺序,尤其在使用通配符时)
@@ -95,10 +95,11 @@
 					       参数可写多个,多个时必须加上引号,且参数之间用逗号分割,如/admins/user/**=roles["admin,guest"]
 					       当有多个参数时必须每个参数都通过才算通过,相当于hasAllRoles()方法 
 					 -->
-		                /login/*=anon  <!-- 测试用例中对/login/*的访问是不需要认证控制的，这主要是用于用户登录和退出的,如果这也需要认证的话，就不像话了因为我去登录就是要去认证的，结果认证还认证？？？$#$%$#$%@% -->
+		                /anon/*=anon  <!-- 测试用例中对/login/*的访问是不需要认证控制的，这主要是用于用户登录和退出的,如果这也需要认证的话，就不像话了因为我去登录就是要去认证的，结果认证还认证？？？$#$%$#$%@% -->
 		                /needAuthentication/*=authc  <!-- 测试用例中对/needAuthentication的访问是需要认证控制的，就是说只有通过认证的用户才可以访问该资源。
 		                                                     如果用户直接在地址栏中访问http://localhost:8880/webname/needAuthentication/*，系统会自动跳转至登录页面，
 		                                                     要求用户先进行身份认证。 -->
+		                /needAuthorization/*=authc,roles[admin]
 		            </value>  
 	        </property>  
     </bean>  

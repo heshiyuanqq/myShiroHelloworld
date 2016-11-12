@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>this is unauthorized.jps </title>
+<title>Insert title here</title>
 </head>
 <body>
-	<h1>对不起你无权访问此页面！</h1>
+<h1>你已经被授权使用此网页了！</h1>
 </body>
 </html>

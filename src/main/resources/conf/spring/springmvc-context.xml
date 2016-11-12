@@ -47,11 +47,11 @@
 		cache-period="604800" />
 
 	<!-- 视图解析器 -->
-	<bean
+<!--  	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/needAuthentication/" />
 		<property name="suffix" value=".jsp" />
-	</bean>
+	</bean>-->
 
 	<aop:config proxy-target-class="true"></aop:config>
 

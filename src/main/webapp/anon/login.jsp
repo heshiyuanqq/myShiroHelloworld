@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>  
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -18,6 +19,9 @@
 		        <input type="submit" value="login" />  
 	    </form>  
 	    <%--用于输入后台返回的验证错误信息 --%>  
-	    <P><c:out value="${message }" /></P>  
+	    <P>
+	    <font color="red">
+	    		<c:out value="${msg }" />
+	    </font></P>  
 </body>
 </html>

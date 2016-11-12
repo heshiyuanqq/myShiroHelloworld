@@ -12,7 +12,7 @@ public class IndexController {
 
 	 	@RequestMapping("/welcome")
 	    public String welcomePage(HttpServletRequest request, String msg,ModelMap model){
-	 			return "index";
+	 			return "redirect:/needAuthentication/index.jsp";
 	    }
 	
 }

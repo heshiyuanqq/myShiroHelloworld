@@ -4,13 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>this is resource2.jsp</title>
+<title>Insert title here</title>
 </head>
 <body>
-<h1>资源2</h1>
-<h2>
-你已经认证通过了
-</h2>
-
+      <h1>这里是主页（已经精认证通过了）</h1>
 </body>
 </html>
