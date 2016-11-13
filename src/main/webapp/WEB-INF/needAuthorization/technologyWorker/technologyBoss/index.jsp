@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>你已经被授权使用此网页了！</h1>
+<h1>技术经理(及其上司)才能访问</h1>
 </body>
 </html>

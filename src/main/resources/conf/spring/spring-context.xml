@@ -96,12 +96,21 @@
 					       当有多个参数时必须每个参数都通过才算通过,相当于hasAllRoles()方法 
 					 -->
 		                /anon/*=anon  <!-- 测试用例中对/login/*的访问是不需要认证控制的，这主要是用于用户登录和退出的,如果这也需要认证的话，就不像话了因为我去登录就是要去认证的，结果认证还认证？？？$#$%$#$%@% -->
-		                /needAuthentication/*=authc  <!-- 测试用例中对/needAuthentication的访问是需要认证控制的，就是说只有通过认证的用户才可以访问该资源。
-		                                                     如果用户直接在地址栏中访问http://localhost:8880/webname/needAuthentication/*，系统会自动跳转至登录页面，
-		                                                     要求用户先进行身份认证。 -->
-		                /needAuthorization/*=authc,roles[admin]
+		                /needAuthentication/**=authc
+		                /boss/*=authc,roles[boss]
+		                
+		                /moneyWorker/*=authc,roles[moneyWorker]
+		                /moneyWorker/moneyBoss/*=authc,roles[moneyBoss]
+		                
+		                
+		                /productWorker/*=authc,roles[productWorker]
+		                /productWorker/productBoss/*=authc,roles[productBoss]
+		                
+		                
+		                /technologyWorker/*=authc,roles[technologyWorker]
+		                /technologyWorker/technologyBoss/*=authc,roles[technologyBoss]
 		            </value>  
-	        </property>  
+	        </property><!--   这里的过滤器不过滤转发 -->
     </bean>  
   
     <!--   
