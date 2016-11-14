@@ -29,5 +29,15 @@ public class UserServiceImpl implements UserService{
 			params.put("password", Md5Util.toMD5(password));
 			return userMapper.getUserByUsernamePassword(params);
 	}
+
+	@Override
+	public User getByUsername(String username) {
+		return userMapper.getByUsername(username);
+	}
+
+	@Override
+	public List<String> getRolenameListByUsername(String username) {
+		return userMapper.getRolenameListByUsername(username);
+	}
 		
 }

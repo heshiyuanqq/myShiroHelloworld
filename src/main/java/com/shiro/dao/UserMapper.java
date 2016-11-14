@@ -18,6 +18,10 @@ public interface UserMapper {
 
 	List<User> getListByConditions(HashMap<String, Object> params);
 
+	User getByUsername(String username);
+
+	List<String> getRolenameListByUsername(String username);
+
 
 
 }

@@ -1,5 +1,7 @@
 package com.shiro.pojo;
 
+import java.util.List;
+
 public class User {
 	    
 		private String id;//id
@@ -68,7 +70,4 @@ public class User {
 					+ gender + ", address=" + address + ", phone=" + phone
 					+ ", email=" + email + "]";
 		}
-
-		
-		
 }

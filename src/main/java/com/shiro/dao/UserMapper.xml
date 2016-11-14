@@ -18,6 +18,17 @@
 	<select id="getUserByUsernamePassword"  resultMap="resultMap" parameterType="java.util.Map">
          SELECT * FROM user WHERE username=#{username} AND password=#{password}
     </select>
+	<select id="getRolenameListByUsername"  resultType="java.lang.String" parameterType="java.lang.String">
+         SELECT r.role_name FROM user_role ur RIGHT JOIN role r ON ur.role_id=r.role_id WHERE ur.username=#{username}
+    </select>
+    
+    
+	<select id="getByUsername"  resultMap="resultMap" parameterType="java.lang.String">
+         SELECT * FROM user WHERE username=#{username}
+    </select>
+    
+    
+    
     
 	<select id="getListByConditions"  resultMap="resultMap" parameterType="java.util.Map">
          SELECT * FROM user 

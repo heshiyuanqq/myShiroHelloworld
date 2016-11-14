@@ -11,12 +11,12 @@
 		<h1>login page</h1>  
 	    <form id="" action="${pageContext.request.contextPath}/login/doLogin" method="post">  
 		        <label>User Name</label> 
-		        <input tyep="text" name="username"    maxLength="40" /> 
+		        <input tyep="text" name="username"    maxLength="40" /> <br/>
 		        
 		        <label>Password</label>
-		        <input type="password"  name="password" />
-		        
-		        <input type="submit" value="login" />  
+		        <input type="password"  name="password" /><br/>
+		        <input type="checkbox" name="rememberMe" value="true" >记住我<br/>
+		        <input type="submit" value="登录"/>
 	    </form>  
 	    <%--用于输入后台返回的验证错误信息 --%>  
 	    <P>

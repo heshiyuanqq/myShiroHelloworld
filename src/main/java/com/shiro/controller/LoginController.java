@@ -22,12 +22,18 @@ import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.UnauthorizedException;
+import org.apache.shiro.session.Session;
+import org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator;
+import org.apache.shiro.session.mgt.eis.SessionDAO;
+import org.apache.shiro.session.mgt.eis.SessionIdGenerator;
 import org.apache.shiro.subject.Subject;
+import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -52,11 +58,13 @@ public class LoginController {
     @RequestMapping("/loginPage")
     public String loginPage(HttpServletRequest request, String msg,ModelMap model){
     	try {
-    		msg=new String(msg.getBytes("iso-8859-1"),"utf-8");
-    		model.addAttribute("msg", msg);
-    		System.out.println("msg="+msg);
+	    		if(msg!=null){
+		    			msg=new String(msg.getBytes("iso-8859-1"),"utf-8");
+		        		model.addAttribute("msg", msg);
+		        		System.out.println("msg="+msg);
+	    		}
 		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
+				e.printStackTrace();
 		}
     	return "/anon/login.jsp";
     }
@@ -71,14 +79,20 @@ public class LoginController {
      * @return 
      */  
     @RequestMapping(value = "/doLogin")  
-    public String doLogin(HttpServletRequest request, Model model,String username,String password,RedirectAttributes redirectAttr) {  
+    public String doLogin(HttpServletRequest request, HttpSession session,Model model,String username,String password,RedirectAttributes redirectAttr) {  
+    	System.out.println("*****************************tomcat的resuest:"+request+",tomcat的session:"+session+"**************************");
 	        String msg = "";  
-	        UsernamePasswordToken token = new UsernamePasswordToken(username, password);//可以自定义token以加入更多的检测项，如"验证码"，即同时还要验证码输入正确  
-	        token.setRememberMe(true);//记住我？？  
-	        Subject subject = SecurityUtils.getSubject();  
+	        Subject subject = SecurityUtils.getSubject();
+	        if(subject.isAuthenticated()){
+	        		return "redirect:/needAuthentication/index.jsp";  
+	        }
+	        boolean rememberMe = ServletRequestUtils.getBooleanParameter(request, "rememberMe", false);//默认是“不记住”！！
+	        System.out.println("rememberMe="+rememberMe);
+	        UsernamePasswordToken token = new UsernamePasswordToken(username, password, rememberMe);
 	        try {  
-		            subject.login(token);  
+	        		subject.login(token);  
 		            if (subject.isAuthenticated()) {  //认证通过
+		            	    subject.getSession().setAttribute("username", username);
 		                	return "redirect:/needAuthentication/index.jsp";  
 		            } else {  
 		                	return "redirect:/login/loginPage";  
@@ -105,12 +119,27 @@ public class LoginController {
 		            msg = "您没有得到相应的授权！" + e.getMessage();  
 		            System.out.println(msg);  
 	        }  
-	        
 	        redirectAttr.addAttribute("msg", msg);
 	        return "redirect:/login/loginPage";  
     }  
     
+    
+    @RequestMapping("/logout")
+    public String logout(){
+            Subject subject = SecurityUtils.getSubject();  
+            Object principal = subject.getPrincipal();
+            if (subject.isAuthenticated()) {  
+	                subject.logout(); // session 会销毁，在SessionListener监听session销毁，清理权限缓存  
+	                System.out.println("用户"+principal+"退出！");
+            }  
+            return "redirect:/login/loginPage";  
+    }
+    
+    
+    
+  
+    
     public static void main(String[] args) {
-		System.out.println(UUID.randomUUID().toString().replaceAll("-", ""));
+		System.out.println(UUID.randomUUID().toString());
 	}
 } 

@@ -16,5 +16,6 @@
       <a href="${pageContext.request.contextPath}/technologyWorker/index">访问技术部员工的资源</a><br/>
       <a href="${pageContext.request.contextPath}/moneyWorker/index">访问财务部员工的资源</a><br/>
       <a href="${pageContext.request.contextPath}/productWorker/index">访问产品部员工的资源</a><br/>
+      <a href="${pageContext.request.contextPath}/login/logout">退出</a>
 </body>
 </html>

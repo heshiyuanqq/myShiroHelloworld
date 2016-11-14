@@ -12,6 +12,10 @@ public interface UserService {
 
 	User getUserByUsernamePassword(String username, String password) throws NoSuchAlgorithmException ;
 
+	User getByUsername(String username);
+
+	List<String> getRolenameListByUsername(String username);
+
 
 
 
